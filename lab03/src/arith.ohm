@@ -1,3 +1,14 @@
 Arithmetic {
-    // write rules here
+  Expr = Sum
+
+//  Sum = NonemptyListOf<Prod, ("+" | "-")>
+//  Prod = NonemptyListOf<Atom, ("*" | "/")>
+  Sum = Prod (("+" | "-") Prod)*
+  Prod = Atom (("*" | "/") Atom)*
+
+  Atom = Neg | Par | number | var
+  Neg = "-" Atom
+  Par = "(" Expr ")"
+  var = letter(alnum)*
+  number = digit+
 }
