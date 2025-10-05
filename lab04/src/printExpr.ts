@@ -31,12 +31,10 @@ export function printExpr(e: Expr, ctx?: OpType, side?: 'l' | 'r'): string
       case 'neg':
           return '-' + printExpr(e.arg, e.type);
       case 'par':
-          console.log('par ctx: ' + ctx + ' inner: ' + e.arg.type + ' ' + printExpr(e.arg, e.type));
           if (isProdType(ctx) && isSumType(inParType(e.arg)) ||
               (ctx === 'div' && isProdType(inParType(e.arg)) ||
                ctx === 'sub' && isSumType(inParType(e.arg))) &&
               side === 'r') {
-              console.log('( )');
               return '(' + printExpr(e.arg, e.type) + ')';
           }
           return printExpr(e.arg, e.type);
